@@ -13,13 +13,13 @@ sys.path.append(os.path.join(parent_folder_path, "plugin"))
 from flowlauncher import FlowLauncher
 import pyperclip
 
-SEARCH_PATH = "FILL-ME-IN"
-
 
 class VetSearch(FlowLauncher):
     def query(self, query):
+        with open(os.path.join(os.getcwd(), "search.path"), "r") as f:
+            search_path = f.read()
         results = []
-        for f in glob.glob(SEARCH_PATH + query + "*"):
+        for f in glob.glob(f"{search_path}{query}*"):
             results.append(
                 {
                     "Title": os.path.splitext(os.path.basename(f))[0],
@@ -30,6 +30,7 @@ class VetSearch(FlowLauncher):
                     },
                 }
             )
+        return results
 
     def context_menu(self, data):
         return []
