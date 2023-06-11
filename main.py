@@ -1,6 +1,7 @@
 import os
 import sys
-import webbrowser
+import glob
+import pyperclip
 
 parent_folder_path = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(parent_folder_path)
@@ -10,41 +11,31 @@ sys.path.append(os.path.join(parent_folder_path, "plugin"))
 # this has to come after we modify the system path
 from flowlauncher import FlowLauncher
 
+SEARCH_PATH = "FILL-ME-IN"
 
-class HelloWorld(FlowLauncher):
+
+class VetSearch(FlowLauncher):
     def query(self, query):
-        return [
-            {
-                "Title": "Hello World, this is where title goes. {}".format(
-                    ("Your query is: " + query, query)[query == ""]
-                ),
-                "SubTitle": "This is where your subtitle goes, press enter to open Flow's url",
-                "IcoPath": "Images/app.png",
-                "JsonRPCAction": {
-                    "method": "open_url",
-                    "parameters": ["https://github.com/Flow-Launcher/Flow.Launcher"],
-                },
-            }
-        ]
+        results = []
+        for f in glob.glob(SEARCH_PATH + query + "*"):
+            results.append(
+                {
+                    "Title": os.path.splitext(os.path.basename(f))[0],
+                    "IcoPath": "images/app.png",
+                    "JsonRPCAction": {
+                        "method": "copy_file",
+                        "parameters": [f],
+                    },
+                }
+            )
 
     def context_menu(self, data):
-        return [
-            {
-                "Title": "Hello World Python's Context menu",
-                "SubTitle": "Press enter to open Flow the plugin's repo in GitHub",
-                "IcoPath": "Images/app.png",
-                "JsonRPCAction": {
-                    "method": "open_url",
-                    "parameters": [
-                        "https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldPython"
-                    ],
-                },
-            }
-        ]
+        return []
 
-    def open_url(self, url):
-        webbrowser.open(url)
+    def copy_file(self, file):
+        with open(file, "r") as f:
+            pyperclip.copy(f.read())
 
 
 if __name__ == "__main__":
-    HelloWorld()
+    VetSearch()
