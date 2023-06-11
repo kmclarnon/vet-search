@@ -1,12 +1,12 @@
 {
-    "ID": "2f4e384e-76ce-45c3-aea2-b16f5e5c328f",
-    "ActionKeyword": "hp",
-    "Name": "Hello World Python",
-    "Description": "Python Hello World example plugin",
-    "Author": "Flow Launcher",
+    "ID": "89e5f5f9-4005-429e-8b43-9ba0ff3b632a",
+    "ActionKeyword": "vs",
+    "Name": "Vet Search",
+    "Description": "Easy search and copy of report templates",
+    "Author": "Kevin McLarnon",
     "Version": "1.0.0",
     "Language": "python",
-    "Website": "https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldPython",
+    "Website": "https://github.com/kmclarnon/vet-search",
     "IcoPath": "Images\\app.png",
     "ExecuteFileName": "main.py"
 }
