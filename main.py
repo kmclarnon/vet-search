@@ -19,7 +19,7 @@ class VetSearch(FlowLauncher):
         with open(os.path.join(os.getcwd(), "search.path"), "r") as f:
             search_path = f.read()
         results = []
-        for f in glob.glob(f"{search_path}{query}*"):
+        for f in glob.glob(f"{search_path}{query}*", recursive=True):
             results.append(
                 {
                     "Title": os.path.splitext(os.path.basename(f))[0],
