@@ -36,7 +36,7 @@ class VetSearch(FlowLauncher):
         return []
 
     def copy_file(self, file):
-        with open(file, "r") as f:
+        with open(file, "r", encoding='utf-8') as f:
             pyperclip.copy(f.read())
 
 
